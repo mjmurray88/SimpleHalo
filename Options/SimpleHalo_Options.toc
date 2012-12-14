@@ -1,0 +1,29 @@
+## Interface: 50100
+## Title: SimpleHalo [|cffeda55fOptions|r]
+## Notes: LoD Options for SimpleHalo.
+## LoadOnDemand: 1
+## Dependencies: SimpleHalo
+## Author: Starinnia
+## Version: @project-version@
+
+#@no-lib-strip@
+Libs\AceLocale-3.0\AceLocale-3.0.xml
+Libs\AceGUI-3.0\AceGUI-3.0.xml
+Libs\AceConfig-3.0\AceConfig-3.0.xml
+Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
+Libs\AceGUI-3.0-SharedMediaWidgets\widget.xml
+#@end-no-lib-strip@
+
+Locales\enUS.lua
+Locales\deDE.lua
+Locales\koKR.lua
+Locales\esES.lua
+Locales\frFR.lua
+Locales\ruRU.lua
+Locales\zhCN.lua
+Locales\zhTW.lua
+Locales\esMX.lua
+Locales\ptBR.lua
+Locales\itIT.lua
+
+Options.lua

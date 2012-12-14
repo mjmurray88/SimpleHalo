@@ -1,0 +1,24 @@
+## Interface: 50100
+## Version: @project-version@
+## Title: SimpleHalo
+## Notes: A simple range indicator for optimizing Halo damage.
+## Author: Starinnia
+## OptionalDeps: Ace3, LibSharedMedia-3.0, LibRangeCheck-2.0, AceGUI-3.0-SharedMediaWidgets
+## X-Category: Combat
+## X-Email: codemaster2010 AT gmail DOT com
+## SavedVariables: SimpleHaloDB
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: true
+
+#@no-lib-strip@
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceConsole-3.0\AceConsole-3.0.xml
+Libs\AceDB-3.0\AceDB-3.0.xml
+Libs\AceEvent-3.0\AceEvent-3.0.xml
+Libs\LibSharedMedia-3.0\lib.xml
+Libs\LibRangeCheck-2.0\LibRangeCheck-2.0.lua
+#@end-no-lib-strip@
+
+Core.lua
