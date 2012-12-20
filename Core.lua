@@ -45,11 +45,14 @@ function SimpleHalo:OnInitialize()
 	self:RegisterChatCommand("simplehalo", "OpenConfig")
 	
 	self.indicator = self:CreateIndicator()
+	self.hasHalo = false
 end
 
 function SimpleHalo:OnEnable()
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "LeaveCombat")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED", "EnterCombat")
+	self:RegisterEvent("CHARACTER_POINTS_CHANGED", "TalentUpdate")
+	self:TalentUpdate()
 end
 
 function SimpleHalo:Reset()
@@ -103,6 +106,16 @@ end
 function SimpleHalo:OpenConfig()
 	LoadAddOn("SimpleHalo_Options")
 	LibStub("AceConfigDialog-3.0"):Open("SimpleHalo")
+end
+
+function SimpleHalo:TalentUpdate()
+	local _, _, _, _, selected = GetTalentInfo(18) --Halo is the 18th talent
+	
+	if selected then
+		self.hasHalo = true
+	else
+		self.hasHalo = false
+	end
 end
 
 function SimpleHalo:EnterCombat()
