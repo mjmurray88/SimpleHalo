@@ -111,22 +111,20 @@ end
 function SimpleHalo:TalentUpdate()
 	local _, _, _, _, selected = GetTalentInfo(18) --Halo is the 18th talent
 	
-	if selected then
-		self.hasHalo = true
-	else
-		self.hasHalo = false
-	end
+	self.hasHalo = selected
 end
 
 function SimpleHalo:EnterCombat()
 	local num = GetNumGroupMembers()
 	local inRaid = UnitInRaid("player")
 	
-	if (num == 0 and self.db.profile.showSolo)
-		or (num > 0 and num <= 5 and (not inRaid) and self.db.profile.showInParty)
-		or (inRaid and self.db.profile.showInRaids)
-	then
-		self.indicator:Show()
+	if self.hasHalo then
+		if (num == 0 and self.db.profile.showSolo)
+			or (num > 0 and num <= 5 and (not inRaid) and self.db.profile.showInParty)
+			or (inRaid and self.db.profile.showInRaids)
+		then
+			self.indicator:Show()
+		end
 	end
 end
 
