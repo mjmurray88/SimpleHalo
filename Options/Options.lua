@@ -269,5 +269,5 @@ local opts = {
 
 opts.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(halo.db)
 LibStub("AceConfig-3.0"):RegisterOptionsTable("SimpleHalo", opts)
-LibStub("AceConfigDialog-3.0"):SetDefaultSize("SimpleHalo", 500, 400)
+LibStub("AceConfigDialog-3.0"):SetDefaultSize("SimpleHalo", 500, 600)
 LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SimpleHalo", "SimpleHalo")
