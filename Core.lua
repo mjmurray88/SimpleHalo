@@ -74,6 +74,7 @@ function SimpleHalo:OnEnable()
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "LeaveCombat")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED", "EnterCombat")
 	self:RegisterEvent("CHARACTER_POINTS_CHANGED", "TalentUpdate")
+	self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED", "TalentUpdate")
 	self:TalentUpdate()
 end
 
