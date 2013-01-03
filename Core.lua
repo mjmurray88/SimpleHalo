@@ -3,7 +3,7 @@ SimpleHalo
 Author: Michael Joseph Murray aka Lyte of Lothar(US)
 $Revision: 13 $
 $Date: 2012-10-26 20:22:31 -0500 (Fri, 26 Oct 2012) $
-Project Version: r250
+Project Version: @project-version@
 contact: codemaster2010 AT gmail DOT com
 
 Copyright (c) 2012 Michael J. Murray aka Lyte of Lothar(US)
