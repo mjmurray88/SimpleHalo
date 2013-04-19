@@ -1,8 +1,8 @@
 --[[
 SimpleHalo
 Author: Michael Joseph Murray aka Lyte of Lothar(US)
-$Revision: 27 $
-$Date: 2013-04-18 22:52:07 -0500 (Thu, 18 Apr 2013) $
+$Revision: 28 $
+$Date: 2013-04-18 23:05:43 -0500 (Thu, 18 Apr 2013) $
 Project Version: @project-version@
 contact: codemaster2010 AT gmail DOT com
 
@@ -72,8 +72,8 @@ function SimpleHalo:OnInitialize()
 end
 
 function SimpleHalo:OnEnable()
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "UpdateVisibility")
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "UpdateVisibility")
+	self:RegisterEvent("PLAYER_REGEN_ENABLED", "LeaveCombat")
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "EnterCombat")
 	self:RegisterEvent("GROUP_ROSTER_UPDATE", "UpdateVisibility")
 	self:RegisterEvent("CHARACTER_POINTS_CHANGED", "TalentUpdate")
 	self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED", "TalentUpdate")
@@ -140,11 +140,11 @@ function SimpleHalo:TalentUpdate()
 	self:UpdateVisibility()
 end
 
-function SimpleHalo:UpdateVisibility()
+function SimpleHalo:UpdateVisibility(event, combat)
 	local db = self.db.profile
 	local num = GetNumGroupMembers()
 	local inRaid = UnitInRaid("player")
-	local combat = InCombatLockdown()
+	combat = combat or InCombatLockdown()
 	
 	if self.hasHalo then
 		--we do have halo
@@ -171,11 +171,11 @@ function SimpleHalo:UpdateVisibility()
 end
 
 function SimpleHalo:EnterCombat()
-	self:UpdateVisibility()
+	self:UpdateVisibility(nil, true)
 end
 
 function SimpleHalo:LeaveCombat()
-	self:UpdateVisibility()
+	self:UpdateVisibility(nil, false)
 end
 
 local lastUpdate = 0
