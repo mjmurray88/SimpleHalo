@@ -1,8 +1,8 @@
 --[[
 SimpleHalo_Options - LoD option module for SimpleHalo
 Author: Michael Joseph Murray aka Lyte of Lothar(US)
-$Revision: 12 $
-$Date: 2012-10-26 18:39:07 -0500 (Fri, 26 Oct 2012) $
+$Revision: 27 $
+$Date: 2013-04-18 22:52:07 -0500 (Thu, 18 Apr 2013) $
 Project Version: @project-version@
 contact: codemaster2010 AT gmail DOT com
 
@@ -50,7 +50,10 @@ local opts = {
 					name = L["Show In Raid"],
 					desc = L["Show the indicator when you enter combat in a raid group."],
 					get = function() return halo.db.profile.showInRaids end,
-					set = function() halo.db.profile.showInRaids = not halo.db.profile.showInRaids end,
+					set = function()
+						halo.db.profile.showInRaids = not halo.db.profile.showInRaids
+						halo:UpdateVisibility()
+					end,
 					order = 3,
 				},
 				showParty = {
@@ -58,7 +61,10 @@ local opts = {
 					name = L["Show In Party"],
 					desc = L["Show the indicator when you enter combat in a five-man party."],
 					get = function() return halo.db.profile.showInParty end,
-					set = function() halo.db.profile.showInParty = not halo.db.profile.showInParty end,
+					set = function()
+						halo.db.profile.showInParty = not halo.db.profile.showInParty
+						halo:UpdateVisibility()
+					end,
 					order = 4,
 				},
 				showSolo = {
@@ -66,8 +72,22 @@ local opts = {
 					name = L["Show Solo"],
 					desc = L["Show the indicator when you enter combat while solo."],
 					get = function() return halo.db.profile.showSolo end,
-					set = function() halo.db.profile.showSolo = not halo.db.profile.showSolo end,
+					set = function()
+						halo.db.profile.showSolo = not halo.db.profile.showSolo
+						halo:UpdateVisibility()
+					end,
 					order = 5,
+				},
+				showOOC = {
+					type = 'toggle',
+					name = L["Show Out of Combat"],
+					desc = L["Force the indicator to show when out of combat. (This respects your group/solo settings)"],
+					get = function() return halo.db.profile.showOOC end,
+					set = function()
+						halo.db.profile.showOOC = not halo.db.profile.showOOC
+						halo:UpdateVisibility()
+					end,
+					order = 6,
 				},
 				header2 = {
 					type = 'header',

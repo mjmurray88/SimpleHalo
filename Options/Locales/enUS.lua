@@ -45,4 +45,5 @@ L["Show In Party"] = true
 L["Show the indicator when you enter combat in a five-man party."] = true
 L["Show Solo"] = true
 L["Show the indicator when you enter combat while solo."] = true
-
+L["Show Out of Combat"] = true
+L["Force the indicator to show when out of combat. (This respects your group/solo settings)"] = true

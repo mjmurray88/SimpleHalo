@@ -1,8 +1,8 @@
 --[[
 SimpleHalo
 Author: Michael Joseph Murray aka Lyte of Lothar(US)
-$Revision: 13 $
-$Date: 2012-10-26 20:22:31 -0500 (Fri, 26 Oct 2012) $
+$Revision: 27 $
+$Date: 2013-04-18 22:52:07 -0500 (Thu, 18 Apr 2013) $
 Project Version: @project-version@
 contact: codemaster2010 AT gmail DOT com
 
@@ -33,6 +33,7 @@ function SimpleHalo:OnInitialize()
 			showInRaids = true,
 			showInParty = true,
 			showSolo = false,
+			showOOC = false,
 		},
 	}
 	
@@ -71,8 +72,9 @@ function SimpleHalo:OnInitialize()
 end
 
 function SimpleHalo:OnEnable()
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "LeaveCombat")
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "EnterCombat")
+	self:RegisterEvent("PLAYER_REGEN_ENABLED", "UpdateVisibility")
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "UpdateVisibility")
+	self:RegisterEvent("GROUP_ROSTER_UPDATE", "UpdateVisibility")
 	self:RegisterEvent("CHARACTER_POINTS_CHANGED", "TalentUpdate")
 	self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED", "TalentUpdate")
 	self:TalentUpdate()
@@ -135,25 +137,45 @@ function SimpleHalo:TalentUpdate()
 	local _, _, _, _, selected = GetTalentInfo(18) --Halo is the 18th talent
 	
 	self.hasHalo = selected
+	self:UpdateVisibility()
 end
 
-function SimpleHalo:EnterCombat()
+function SimpleHalo:UpdateVisibility()
+	local db = self.db.profile
 	local num = GetNumGroupMembers()
 	local inRaid = UnitInRaid("player")
+	local combat = InCombatLockdown()
 	
 	if self.hasHalo then
-		if (num == 0 and self.db.profile.showSolo)
-			or (num > 0 and num <= 5 and (not inRaid) and self.db.profile.showInParty)
-			or (inRaid and self.db.profile.showInRaids)
-		then
-			self.indicator:Show()
+		--we do have halo
+		if (not db.showOOC and combat) or db.showOOC then
+			--check that we're in combat or set to ignore combat
+			if (num == 0 and db.showSolo)
+				or (num > 0 and num <= 5 and (not inRaid) and db.showInParty)
+				or (inRaid and db.showInRaids)
+			then
+				--group setings verified, show
+				self.indicator:Show()
+			else
+				--don't match group settings, hide
+				self.indicator:Hide()
+			end
+		else
+			--need to hide because we're set to only show in combat and we're not in combat
+			self.indicator:Hide()
 		end
+	else
+		--we don't have Halo, so hide
+		self.indicator:Hide()
 	end
 end
 
+function SimpleHalo:EnterCombat()
+	self:UpdateVisibility()
+end
+
 function SimpleHalo:LeaveCombat()
-	--hide the frame to stop range polling
-	self.indicator:Hide()
+	self:UpdateVisibility()
 end
 
 local lastUpdate = 0
