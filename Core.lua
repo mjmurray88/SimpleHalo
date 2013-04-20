@@ -148,7 +148,7 @@ function SimpleHalo:UpdateVisibility(event, combat)
 	
 	if self.hasHalo then
 		--we do have halo
-		if (not db.showOOC and combat) or db.showOOC then
+		if combat or db.showOOC then
 			--check that we're in combat or set to ignore combat
 			if (num == 0 and db.showSolo)
 				or (num > 0 and num <= 5 and (not inRaid) and db.showInParty)
