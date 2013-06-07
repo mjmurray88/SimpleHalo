@@ -42,7 +42,10 @@ local opts = {
 					name = L["Lock Frame"],
 					desc = L["Lock the frame to prevent movement."],
 					get = function() return halo.db.profile.locked end,
-					set = function() halo.db.profile.locked = not halo.db.profile.locked end,
+					set = function()
+						halo.db.profile.locked = not halo.db.profile.locked
+						halo.indicator:EnableMouse(not halo.db.profile.locked)
+					end,
 					order = 2,
 				},
 				showRaid = {
