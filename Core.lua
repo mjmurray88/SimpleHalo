@@ -154,7 +154,7 @@ function SimpleHalo:UpdateVisibility(event, combat)
 				or (num > 0 and num <= 5 and (not inRaid) and db.showInParty)
 				or (inRaid and db.showInRaids)
 			then
-				--group setings verified, show
+				--group settings verified, show
 				self.indicator:Show()
 			else
 				--don't match group settings, hide
@@ -229,7 +229,7 @@ function SimpleHalo:CreateIndicator()
 	local db = self.db.profile
 	local f = CreateFrame("FRAME", nil, UIParent)
 	
-	--size and positon
+	--size and position
 	f:SetWidth(70*db.scale)
 	f:SetHeight(35*db.scale)
 	
