@@ -6,7 +6,7 @@ $Date: 2013-04-18 23:05:43 -0500 (Thu, 18 Apr 2013) $
 Project Version: @project-version@
 contact: codemaster2010 AT gmail DOT com
 
-Copyright (c) 2012 Michael J. Murray aka Lyte of Lothar(US)
+Copyright (c) 2012-2014 Michael J. Murray aka Lyte of Lothar(US)
 All rights reserved unless otherwise explicitly stated.
 ]]
 
