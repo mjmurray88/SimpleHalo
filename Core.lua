@@ -134,7 +134,7 @@ function SimpleHalo:OpenConfig()
 end
 
 function SimpleHalo:TalentUpdate()
-	local _, _, _, _, selected = GetTalentInfo(18) --Halo is the 18th talent
+	local _, _, _, _, selected = GetTalentInfo(6, 3, 1) --Halo is the 18th talent
 	
 	self.hasHalo = selected
 	self:UpdateVisibility()

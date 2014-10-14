@@ -1,4 +1,4 @@
-## Interface: 50300
+## Interface: 60000
 ## Version: @project-version@
 ## Title: SimpleHalo
 ## Notes: A simple range indicator for optimizing Halo damage.
