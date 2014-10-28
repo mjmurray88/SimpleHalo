@@ -45,8 +45,8 @@ function SimpleHalo:OnInitialize()
 	self.db.RegisterCallback(self, "OnProfileChanged", "Refresh")
 	
 	AceConfig:RegisterOptionsTable("SimpleHalo_Bliz", {
-		name = "ComboPointsRedux",
-		handler = ComboPointsRedux,
+		name = "SimpleHalo",
+		handler = SimpleHalo,
 		type = 'group',
 		args = {
 			config = {
