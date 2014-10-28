@@ -1,12 +1,12 @@
 --[[
 SimpleHalo
 Author: Michael Joseph Murray aka Lyte of Lothar(US)
-$Revision: 28 $
-$Date: 2013-04-18 23:05:43 -0500 (Thu, 18 Apr 2013) $
+$Revision: 39 $
+$Date: 2014-10-14 18:02:33 -0500 (Tue, 14 Oct 2014) $
 Project Version: @project-version@
 contact: codemaster2010 AT gmail DOT com
 
-Copyright (c) 2012-2014 Michael J. Murray aka Lyte of Lothar(US)
+Copyright (c) 2012 Michael J. Murray aka Lyte of Lothar(US)
 All rights reserved unless otherwise explicitly stated.
 ]]
 
@@ -42,27 +42,24 @@ function SimpleHalo:OnInitialize()
 	self.db.RegisterCallback(self, "OnProfileCopied", "Refresh")
 	self.db.RegisterCallback(self, "OnProfileChanged", "Refresh")
 	
-	local spy = CreateFrame("FRAME", nil, UIParent)
-	spy.name = "SimpleHalo"
-	spy.addon = "SimpleHalo_Options"
-	spy:Hide()
-	spy:SetScript("OnShow", function(self)
-		--remove the dummy entry
-		for i, f in ipairs(INTERFACEOPTIONS_ADDONCATEGORIES) do
-			if f == self.name or f.name == self.name then
-				tremove(INTERFACEOPTIONS_ADDONCATEGORIES, i)
-				break
-			end
-		end
-		self:Hide()
-		
-		--load the config
-		LoadAddOn(self.addon)
-		
-		--refresh the screen
-		InterfaceOptionsFrame_OpenToCategory(self.name)
-	end)
-	InterfaceOptions_AddCategory(spy)
+	AceConfig:RegisterOptionsTable("SimpleHalo_Bliz", {
+		name = "ComboPointsRedux",
+		handler = ComboPointsRedux,
+		type = 'group',
+		args = {
+			config = {
+				name = L["Standalone config"],
+				desc = L["Open a standlone config window, allowing you to actually configure SimpleHalo."],
+				type = 'execute',
+				func = function()
+					InterfaceOptionsFrameCancel:Click()
+					GameMenuButtonContinue:Click()
+					SimpleHalo.OpenConfig()
+				end
+			}
+		},
+	})
+	AceConfigDialog:AddToBlizOptions("SimpleHalo_Bliz", "SimpleHalo")
 	
 	self:RegisterChatCommand("halo", "OpenConfig", true, true)
 	self:RegisterChatCommand("simplehalo", "OpenConfig")
@@ -154,7 +151,7 @@ function SimpleHalo:UpdateVisibility(event, combat)
 				or (num > 0 and num <= 5 and (not inRaid) and db.showInParty)
 				or (inRaid and db.showInRaids)
 			then
-				--group settings verified, show
+				--group setings verified, show
 				self.indicator:Show()
 			else
 				--don't match group settings, hide
@@ -229,7 +226,7 @@ function SimpleHalo:CreateIndicator()
 	local db = self.db.profile
 	local f = CreateFrame("FRAME", nil, UIParent)
 	
-	--size and position
+	--size and positon
 	f:SetWidth(70*db.scale)
 	f:SetHeight(35*db.scale)
 	
