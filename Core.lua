@@ -50,8 +50,8 @@ function SimpleHalo:OnInitialize()
 		type = 'group',
 		args = {
 			config = {
-				name = L["Standalone config"],
-				desc = L["Open a standlone config window, allowing you to actually configure SimpleHalo."],
+				name = "Standalone config",
+				desc = "Open a standlone config window, allowing you to actually configure SimpleHalo.",
 				type = 'execute',
 				func = function()
 					InterfaceOptionsFrameCancel:Click()
