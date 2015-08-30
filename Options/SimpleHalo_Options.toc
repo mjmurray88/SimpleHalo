@@ -1,4 +1,4 @@
-## Interface: 60000
+## Interface: 60200
 ## Title: SimpleHalo [|cffeda55fOptions|r]
 ## Notes: LoD Options for SimpleHalo.
 ## LoadOnDemand: 1
